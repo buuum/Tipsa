@@ -1,0 +1,28 @@
+{
+  "name": "buuum/tipsa",
+  "type": "library",
+  "description": "Simple php api class with TIPSA",
+  "homepage": "https://github.com/buuum/Tipsa",
+  "keywords": [
+    "tipsa",
+    "api"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alfons Martinez",
+      "email": "alfonsmartinezparra@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Buuum\\": "src/Tipsa"
+    }
+  },
+  "require": {
+    "php": ">=5.5.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "*"
+  }
+}
