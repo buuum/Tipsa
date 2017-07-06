@@ -118,12 +118,20 @@ class Tipsa
     private function parseEnvios($results)
     {
         $sends = [];
-        foreach ($results['ENV_ESTADOS_REF'] as $result) {
-            $sends[] = [
-                'date'      => $result['@attributes']['D_FEC_HORA_ALTA'],
-                'code_type' => $result['@attributes']['V_COD_TIPO_EST'],
-                'code'      => $this->getCode($result['@attributes']['V_COD_TIPO_EST'])
-            ];
+        foreach ($results['ENV_ESTADOS_REF'] as $k => $result) {
+            if ($k == '@attributes') {
+                $sends[] = [
+                    'date'      => empty($result['D_FEC_HORA_ALTA']) ? '' : $result['D_FEC_HORA_ALTA'],
+                    'code_type' => empty($result['V_COD_TIPO_EST']) ? '' : $result['V_COD_TIPO_EST'],
+                    'code'      => empty($result['V_COD_TIPO_EST']) ? '' : $this->getCode($result['V_COD_TIPO_EST']),
+                ];
+            } else {
+                $sends[] = [
+                    'date'      => empty($result['@attributes']['D_FEC_HORA_ALTA']) ? '' : $result['@attributes']['D_FEC_HORA_ALTA'],
+                    'code_type' => empty($result['@attributes']['V_COD_TIPO_EST']) ? '' : $result['@attributes']['V_COD_TIPO_EST'],
+                    'code'      => empty($result['@attributes']['V_COD_TIPO_EST']) ? '' : $this->getCode($result['@attributes']['V_COD_TIPO_EST']),
+                ];
+            }
         }
 
         usort($sends, function ($a, $b) {
